@@ -213,7 +213,7 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
     .catch((error: any) => console.log(error));
 
   const resMedias = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/v1/inventory/car_media?carId=R1nVTV4Mj`
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/v1/inventory/car_media?carId=${params.id}`
   );
   const medias = await resMedias
     .json()
