@@ -87,7 +87,7 @@ const Layout: FunctionComponent<Props> = ({ children }) => {
                 required
               />
             </div>
-            <button type="submit">Search</button>
+            <button type="submit" className="btn">Search</button>
           </form>
         </div>
         <div className={styles.shopHeadItem}>Checkout Icon</div>

@@ -7,33 +7,72 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 40px 0;
   width: 700px;
   border-radius: 3px;
   box-shadow: 1px 3px 7px -2px rgb(115 115 115 / 75%);
   -webkit-box-shadow: 1px 3px 7px -2px rgb(115 115 115 / 75%);
   -moz-box-shadow: 1px 3px 7px -2px rgba(115, 115, 115, 0.75);
 }
-.title{
-    width: 100%;
-    text-align: center;
-    border-bottom: 2px solid #d8d6d6;
-    margin-bottom: 20px;
+.medias {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0;
+  width: 700px;
+  border-radius: 3px;
+  box-shadow: 1px 3px 7px -2px rgb(115 115 115 / 75%);
+  -webkit-box-shadow: 1px 3px 7px -2px rgb(115 115 115 / 75%);
+  -moz-box-shadow: 1px 3px 7px -2px rgba(115, 115, 115, 0.75);
 }
-.tableInfos{
-    width: 100%;
-    border-collapse: collapse;
+
+.itemNew {
+  position: absolute;
+  z-index: 1;
+  top: 40px;
+  background-color: #d9597b;
+  color: white;
+  width: 50px;
+  text-align: center;
 }
-.tableTh{
-    padding: 15px;
-    text-align: left;
+.itemInfos {
+  margin: 10px;
 }
-.tableTd{
-    padding: 15px;
-    text-align: right;
+.carImg {
+  object-fit: cover;
+  border-radius: 3px;
 }
-.tableTr{
-    height: 40px;
+.itemPrice {
+  font-weight: bold;
 }
-.tableTrColored{
-    background-color: #f3f1f1;
+.itemOtherInfos {
+  display: flex;
+  margin: 15px 0;
+  justify-content: space-between;
+  font-size: 15px;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+  border-bottom: 2px solid #d8d6d6;
+  margin-bottom: 20px;
+}
+.tableInfos {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tableTh {
+  padding: 15px;
+  text-align: left;
+}
+.tableTd {
+  padding: 15px;
+  text-align: right;
+}
+.tableTr {
+  height: 40px;
+}
+.tableTrColored {
+  background-color: #f3f1f1;
 }

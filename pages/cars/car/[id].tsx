@@ -1,8 +1,11 @@
 import { NextPage } from "next";
-import { useRouter } from "next/router";
 import { CarListInterface } from "../../../components/CarCard";
 import { PaginationInterface } from "..";
 import styles from "../../../styles/CarDetails.module.css";
+import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
+import "react-image-gallery/styles/css/image-gallery.css";
+import { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 
 export interface CarDetailsInterface {
   id: string;
@@ -12,6 +15,8 @@ export interface CarDetailsInterface {
   country: string;
   city: string;
   state: string;
+  mileage: number;
+  mileageUnit: string;
   sellingCondition: string;
   marketplacePrice: number;
   marketplaceOldPrice: number;
@@ -37,11 +42,108 @@ interface CarMediaInterface {
 
 const Cars: NextPage<{
   car: CarDetailsInterface;
-  medias: CarMediaInterface;
+  medias: CarMediaInterface[];
 }> = ({ car, medias }) => {
+  const [stateMedias, setStateMedias] = useState<ReactImageGalleryItem[]>([]);
+  const [showVideo, setShowVideo] = useState<any>([]);
+  const [showGalleryFullscreenButton, setShowGalleryFullscreenButton] = useState<boolean>(true);
+  const [showFullscreenButton, setShowFullscreenButton] = useState<boolean>(true);
+  const [showPlayButton, setShowPlayButton] = useState<boolean>(true);
+
+  const toggleShowVideo = useCallback((url: any)=>{
+    showVideo[url] = !Boolean(showVideo[url]);
+    setShowVideo(showVideo)
+
+    if (showVideo[url]) {
+      if (showPlayButton) {
+        setShowPlayButton(false)
+      }
+
+      if (showFullscreenButton) {
+        setShowGalleryFullscreenButton(false)
+      }
+    }
+  }, [showFullscreenButton, showPlayButton, showVideo])
+
+  const renderVideo = useCallback((item: any)=>{
+    return (
+      <div>
+        {
+          showVideo[item.embedUrl] ?
+            <div className='video-wrapper'>
+                <a
+                  className='close-video'
+                  onClick={()=>toggleShowVideo(item.embedUrl)}
+                >
+                </a>
+                <iframe
+                  width='560'
+                  height='315'
+                  src={item.embedUrl}
+                  frameBorder='0'
+                  allowFullScreen
+                >
+                </iframe>
+            </div>
+          :
+            <a onClick={()=>toggleShowVideo(item.embedUrl)}>
+              <div className='play-button'></div>
+              <Image className="image-gallery-image" src={item.original} layout="fill" alt="Image"/>
+              {
+                item.description &&
+                  <span
+                    className='image-gallery-description'
+                    style={{right: '0', left: 'initial'}}
+                  >
+                    {item.description}
+                  </span>
+              }
+            </a>
+        }
+      </div>
+    );
+  } ,[showVideo, toggleShowVideo]) 
+  
+
+  useEffect(() => {
+    const newStateMedias = medias.map((media, index): ReactImageGalleryItem => {
+      const mediaImageGalleryItem: ReactImageGalleryItem = {
+        thumbnail: media.url,
+        original: media.url,
+        sizes: "700x450",
+        renderItem: media.type.search('video') != -1 ? renderVideo : undefined
+      };
+      return mediaImageGalleryItem;
+    });
+
+    setStateMedias(newStateMedias);
+  }, [medias, renderVideo]);
+
   return (
     <>
       <div className={styles.content}>
+        <div className={styles.medias}>
+          {car.sellingCondition && <span className={styles.itemNew}>New</span>}
+          <ImageGallery items={stateMedias} />
+          <div className={styles.itemInfos}>
+            <h3>{car.carName}</h3>
+            <div>
+              <span className={styles.itemPrice}>
+                {car.marketplacePrice.toLocaleString()} FCFA
+              </span>
+            </div>
+            <div className={styles.itemOtherInfos}>
+              <span>{car.year}</span>
+              <span>
+                {car.mileage} {car.mileageUnit}
+              </span>
+              <span>
+                {car.city}, {car.state}
+              </span>
+            </div>
+          </div>
+        </div>
+
         <div className={styles.infos}>
           <div className={styles.title}>
             <h3>Informations</h3>
@@ -111,7 +213,7 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
     .catch((error: any) => console.log(error));
 
   const resMedias = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/v1/inventory/car_media?carId=${params.id}`
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/v1/inventory/car_media?carId=R1nVTV4Mj`
   );
   const medias = await resMedias
     .json()
