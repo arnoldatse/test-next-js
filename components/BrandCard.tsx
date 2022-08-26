@@ -3,54 +3,31 @@ import styles from "../styles/BrandItemList.module.css";
 import Image from "next/image";
 import Link from "next/link";
 
-export interface CarListInterface {
-  id: string;
-  title: string;
+export interface BrandInterface {
+  id: number;
+  name: string;
   imageUrl: string;
-  year: string;
-  city: string;
-  state: string;
-  sellingCondition: string;
-  hasWarranty: boolean;
-  marketplacePrice: number;
-  marketplaceOldPrice: number;
-  transmission: string;
-  mileage: number;
-  mileageUnit: string;
 }
 
-const CarCard: FunctionComponent<{ car: CarListInterface }> = ({ car }) => {
+export interface BrandPropsInterface {
+  href?: string;
+  id?: number;
+  name: string;
+  imageUrl: string;
+}
+
+
+const BrandCard: FunctionComponent<{ brand: BrandPropsInterface }> = ({ brand }) => {
   return (
-    <Link href={`cars/car/${car.id}`}>
+    <Link href={brand.href ?? "/not_ready"}>
       <a className={styles.item}>
-        {car.sellingCondition && <span className={styles.itemNew}>New</span>}
-        <Image
-          className={styles.carImg}
-          src={car.imageUrl}
-          alt="All cars"
-          width="100%"
-          height={180}
-        />
-        <div className={styles.itemTitleContainer}>
-          <h5 className={styles.itemTitle}>{car.title}</h5>
-        </div>
-        <div className={styles.itemInfos}>
-          <div>
-            <span className={styles.itemPrice}>{car.marketplacePrice} CFA</span>
-          </div>
-          <div className={styles.itemOtherInfos}>
-            <span>{car.year}</span>
-            <span>
-              {car.mileage} {car.mileageUnit}
-            </span>
-            <span>
-              {car.city}, {car.state}
-            </span>
-          </div>
-        </div>
+        {brand.imageUrl && brand.imageUrl != "" && (
+          <Image className={styles.itemImg} src={brand.imageUrl} alt="Image" layout="intrinsic" width={100} height={100}/>
+        )}
+        <h3 className={styles.itemTitle}>{brand.name}</h3>
       </a>
     </Link>
   );
 };
 
-export default CarCard;
+export default BrandCard;

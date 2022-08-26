@@ -51,15 +51,15 @@ const CarsContent: FunctionComponent = () => {
 
   return (
     <div className={styles.carsList}>
-      <h2 className={styles.title}>Toutes les voitures</h2>
+      <h2 className={styles.title}>TOUTES LES VOITURES</h2>
       <div className={styles.content}>
         {!isLoading &&
           !isError &&
           cars?.map((car) => <CarCard key={car.id} car={car} />)}
         {isLoading &&
-          [...Array(12)].map((i) => (
+          [...Array(12)].map((i, index) => (
             <Skeleton
-              key={i}
+              key={index}
               width={300}
               height={271}
               style={{ margin: "20px", borderRadius: "2px" }}

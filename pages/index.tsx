@@ -1,46 +1,26 @@
 import { NextPage } from "next";
-import Link from "next/link";
 import styles from "../styles/Home.module.css";
-import Image from "next/image";
-
-interface BrandInterface {
-  id: number;
-  name: string;
-  imageUrl: string;
-}
+import { BrandInterface, BrandPropsInterface } from "../components/BrandCard";
+import BrandCard from "../components/BrandCard";
+import { useEffect, useState } from "react";
 
 const Home: NextPage<{ brands: BrandInterface[] }> = ({ brands }) => {
+  const [stateBrands, setStateBrands] = useState<BrandPropsInterface[]>(brands)
+
+  useEffect(()=>{
+    const newStateBrands: BrandPropsInterface[] = [...brands]
+    newStateBrands.push({ href:"/cars", name:"Toutes les voitures" , imageUrl:"/assets/pictures/all_cars.jpg" })
+    setStateBrands(newStateBrands)
+  }, [brands])
   return (
-    <div>
-      <div className={styles.brands}>
-        {brands.map((brand) => {
+    <div className={styles.brandsList}>
+      <h2 className={styles.title}>BRANDS</h2>
+      <div className={styles.content}>
+        {stateBrands.map((brand, index) => {
           return (
-            <Link href="/not_ready" key={brand.id}>
-              <a className={styles.brand}>
-                {brand.imageUrl && brand.imageUrl != "" && (
-                  <Image
-                    src={brand.imageUrl}
-                    alt="Image"
-                    width={100}
-                    height={100}
-                  />
-                )}
-                <h3>{brand.name}</h3>
-              </a>
-            </Link>
+            <BrandCard brand={brand} key={index}/>
           );
         })}
-        <Link href="/cars">
-          <a className={styles.brand}>
-            <Image
-              src="/assets/pictures/all_cars.jpg"
-              alt="All cars"
-              width={100}
-              height={100}
-            />
-            <h3>Toutes les voitures</h3>
-          </a>
-        </Link>
       </div>
     </div>
   );

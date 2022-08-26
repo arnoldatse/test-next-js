@@ -1,0 +1,39 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.infos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 700px;
+  border-radius: 3px;
+  box-shadow: 1px 3px 7px -2px rgb(115 115 115 / 75%);
+  -webkit-box-shadow: 1px 3px 7px -2px rgb(115 115 115 / 75%);
+  -moz-box-shadow: 1px 3px 7px -2px rgba(115, 115, 115, 0.75);
+}
+.title{
+    width: 100%;
+    text-align: center;
+    border-bottom: 2px solid #d8d6d6;
+    margin-bottom: 20px;
+}
+.tableInfos{
+    width: 100%;
+    border-collapse: collapse;
+}
+.tableTh{
+    padding: 15px;
+    text-align: left;
+}
+.tableTd{
+    padding: 15px;
+    text-align: right;
+}
+.tableTr{
+    height: 40px;
+}
+.tableTrColored{
+    background-color: #f3f1f1;
+}

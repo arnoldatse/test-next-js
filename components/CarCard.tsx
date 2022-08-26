@@ -36,7 +36,7 @@ const CarCard: FunctionComponent<{ car: CarListInterface }> = ({ car }) => {
         </div>
         <div className={styles.itemInfos}>
           <div>
-            <span className={styles.itemPrice}>{car.marketplacePrice.toLocaleString()} CFA</span>
+            <span className={styles.itemPrice}>{car.marketplacePrice.toLocaleString()} FCFA</span>
           </div>
           <div className={styles.itemOtherInfos}>
             <span>{car.year}</span>

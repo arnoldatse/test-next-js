@@ -1,8 +1,10 @@
-import { NextPage } from "next"
-import styles from "../styles/NotReady.module.css"
+import { NextPage } from "next";
+import styles from "../styles/NotReady.module.css";
 
 const NotReady: NextPage = () => (
-    <h1 className={styles.title}>Not ready</h1>
-)
+  <div className={styles.content}>
+    <h1>Not ready</h1>
+  </div>
+);
 
-export default NotReady
+export default NotReady;
