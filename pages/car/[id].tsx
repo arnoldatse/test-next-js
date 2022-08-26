@@ -1,7 +1,7 @@
 import { NextPage } from "next";
-import { CarListInterface } from "../../../components/CarCard";
-import { PaginationInterface } from "..";
-import styles from "../../../styles/CarDetails.module.css";
+import { CarListInterface } from "../../components/CarCard";
+import { PaginationInterface } from "../cars";
+import styles from "../../styles/CarDetails.module.css";
 import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { useCallback, useEffect, useState } from "react";

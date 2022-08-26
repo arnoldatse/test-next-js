@@ -21,7 +21,7 @@ export interface CarListInterface {
 
 const CarCard: FunctionComponent<{ car: CarListInterface }> = ({ car }) => {
   return (
-    <Link href={`cars/car/${car.id}`}>
+    <Link href={`car/${car.id}`}>
       <a className={styles.item}>
         {car.sellingCondition && <span className={styles.itemNew}>New</span>}
         <Image
