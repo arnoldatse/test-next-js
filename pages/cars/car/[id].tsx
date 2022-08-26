@@ -1,7 +1,7 @@
 import { NextPage } from "next";
-import { CarListInterface } from "../../components/CarCard";
-import { PaginationInterface } from "../cars";
-import styles from "../../styles/CarDetails.module.css";
+import { CarListInterface } from "../../../components/CarCard";
+import { PaginationInterface } from "..";
+import styles from "../../../styles/CarDetails.module.css";
 import ImageGallery, { ReactImageGalleryItem } from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { useCallback, useEffect, useState } from "react";
@@ -40,7 +40,7 @@ interface CarMediaInterface {
   type: string;
 }
 
-const Cars: NextPage<{
+const Car: NextPage<{
   car: CarDetailsInterface;
   medias: CarMediaInterface[];
 }> = ({ car, medias }) => {
@@ -223,4 +223,4 @@ export async function getStaticProps({ params }: { params: { id: string } }) {
   return { props: { car, medias } };
 }
 
-export default Cars;
+export default Car;
